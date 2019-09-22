@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './App.scss';
 
-import { RateMap, WrapState, changeURLAction, loadDataAction } from './store';
+import { RateMap, WrapState, changeURLAction, loadDataAction, notifyUser } from './store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
@@ -10,6 +10,7 @@ import { AnyAction } from 'redux';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { DataTable } from './DataTable';
+import { BaseModal } from './BaseDialog';
 
 
 
@@ -17,7 +18,8 @@ export interface Props {
   loadData?: (url: string) => void;
   url?: string;
   changeURL?: (url: string) => void;
-  loading?: boolean;
+  clearError?: () => void;
+  loading: boolean;
   currency?: string;
   rates?: RateMap;
   error?: string ;
@@ -33,6 +35,9 @@ const App: React.FC<Props> = (props) => {
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     props.changeURL!(event.currentTarget.value || '');
   };
+
+  const noop = () =>{};
+
   
   return (
     <div className="App">
@@ -48,10 +53,11 @@ const App: React.FC<Props> = (props) => {
           
         </div>
         
+        {props.error ? <BaseModal  message={props.error} closeModal = {props.clearError || noop }  /> : '' }
         
-        <p className="error">{props.error}</p>
-        <DataTable rates={props.rates}/>
+        
       </header>
+      <DataTable rates={props.rates}/>
     </div>
   );
 }
@@ -69,7 +75,8 @@ const mapStateToProps = (store: WrapState) => {
 const mapDispatchProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
     loadData: (url: string) => dispatch(loadDataAction(url)),
-    changeURL: (url: string) => dispatch(changeURLAction(url))
+    changeURL: (url: string) => dispatch(changeURLAction(url)),
+    clearError: () => dispatch(notifyUser())
   }
 };
 

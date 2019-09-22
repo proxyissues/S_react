@@ -31,8 +31,15 @@ const remoteReducer: Reducer<AppState, AppActions> = (
             const { error } = action;
             return {
                 ...state,
-                //loading: false,
+                rates: {},
+                loading: false,
                 error
+            }
+        case 'DialogAction':
+            const {message } = action;
+            return {
+                ...state,
+                message
             }
         default:
             console.log(`Unknown action: ${type}`);
