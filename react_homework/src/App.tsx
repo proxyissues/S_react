@@ -37,14 +37,7 @@ const App: React.FC<Props> = (props) => {
          <button onClick={fetchData}>Fetch Data</button>
         </p>
         
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="error">{props.error}</div>
       </header>
     </div>
   );

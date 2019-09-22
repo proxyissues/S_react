@@ -3,9 +3,9 @@ import { AppActions, initialAppState, AppState, WrapState } from "./store";
 
 const remoteReducer: Reducer<AppState, AppActions> = (
     state = initialAppState,
-    action
+    action: AppActions
 ) => {
-    
+    const type = action.type;
     switch(action.type){
         case 'LoadData': 
             return {
@@ -27,8 +27,14 @@ const remoteReducer: Reducer<AppState, AppActions> = (
                 ...state,
                 url
             }
+        case 'ErrorAction':
+            const { error } = action;
+            return {
+                ...state,
+                error
+            }
         default:
-            console.log(`Unknown action: ${action}`);
+            console.log(`Unknown action: ${type}`);
     }
     return state;
 }
