@@ -1,7 +1,5 @@
 $linkColor: #09d3ac;
 
-
-
 .App {
   text-align: center;
 }
@@ -34,7 +32,6 @@ $linkColor: #09d3ac;
   color: red;
 }
 
-
 .control-block {
   display: grid;
   align-items: center;
@@ -44,7 +41,7 @@ $linkColor: #09d3ac;
   :nth-child(odd) {
     justify-self: right;
   }
-  :nth-child(even){
+  :nth-child(even) {
     justify-self: left;
   }
 }
@@ -60,19 +57,23 @@ $linkColor: #09d3ac;
   width: 50%;
 
   grid-template-columns: auto auto;
-  @media (min-width: 600px){
+  @media (min-width: 450px) {
     grid-template-columns: auto auto auto auto;
   }
 
-  @media (min-width: 1200px){
+  @media (min-width: 550px) {
     grid-template-columns: auto auto auto auto auto auto;
   }
 
-  :nth-child(odd){
+  @media (min-width: 800px) {
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+  }
+
+  :nth-child(odd) {
     color: #ca5858;
     justify-self: right;
   }
-  :nth-child(even){
+  :nth-child(even) {
     justify-self: right;
   }
 }

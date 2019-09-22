@@ -30,9 +30,9 @@ export interface Props {
 
 const App: React.FC<Props> = props => {
   const fetchData = () => {
-    props.loadData && props.url
-      ? props.loadData(props.url)
-      : console.log("Fetch requested by no props");
+    if (props.loadData && props.url) {
+      props.loadData(props.url);
+    }
   };
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     props.changeURL!(event.currentTarget.value || "");
