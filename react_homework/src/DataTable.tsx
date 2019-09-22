@@ -4,12 +4,15 @@ import { RateMap } from "./store";
 interface Props {
   rates?: RateMap;
 }
-interface Row {
-  a: string;
-  b: number;
-}
 
-export const DataTable: React.FC<Props> = ({ rates = {} }) => {
+/**
+ * Data table rendering of exchange rates
+ * @param param0
+ */
+export const DataTable: React.FC<Props> = ({ rates }) => {
+  if (!rates) {
+    return null;
+  }
   const info = Object.keys(rates).sort();
   return (
     <div className="data-table">

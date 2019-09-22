@@ -27,20 +27,11 @@ export interface ErrorAction extends Action<"ErrorAction"> {
   error: string | undefined;
 }
 
-export interface DialogAction extends Action<"DialogAction"> {
-  message?: string;
-}
-
-export type AppActions =
-  | LoadingData
-  | LoadedData
-  | ChangeURL
-  | ErrorAction
-  | DialogAction;
+export type AppActions = LoadingData | LoadedData | ChangeURL | ErrorAction;
 
 /**
  * Async fetch of data from remote URL, throwing exception on invalid input or fetch.
- * @param url
+ * @param url Passed to 'fetch' as-is
  */
 const getDataFromApi = async (url: string): Promise<RemoteData> => {
   if (url == null) {
@@ -54,6 +45,12 @@ const getDataFromApi = async (url: string): Promise<RemoteData> => {
     });
 };
 
+/**
+ * Load data from the target URL. Asynchronously updates the {@link AppState#loading} flag as well as {@link AppState#rates}, {@link AppState#error}
+ * if applicable.
+ * @param url Target of load operation, passed as-is to network call
+ * @throws string based exception containing error result or networking error
+ */
 export const loadDataAction: ActionCreator<
   ThunkAction<Promise<void>, RemoteData, null, LoadedData>
 > = url => {
@@ -82,6 +79,10 @@ export const loadDataAction: ActionCreator<
   };
 };
 
+/**
+ * Change application target URL for data.  Passed as-is without validation
+ * @param url unvalidated URL
+ */
 export const changeURLAction: ActionCreator<
   ThunkAction<Promise<void>, null, null, ChangeURL>
 > = url => {
@@ -95,6 +96,10 @@ export const changeURLAction: ActionCreator<
   };
 };
 
+/**
+ * Notify the user of an error
+ * @param message Message to be displayed, or undefined to clear the error message
+ */
 export const notifyUser: ActionCreator<
   ThunkAction<Promise<void>, null, null, ErrorAction>
 > = (message: string | undefined) => {
@@ -107,6 +112,9 @@ export const notifyUser: ActionCreator<
   };
 };
 
+/**
+ * Application state, simple object
+ */
 export interface AppState {
   error?: string;
   url: string;
@@ -115,7 +123,10 @@ export interface AppState {
   loading: boolean;
 }
 
-export interface WrapState {
+/**
+ * State wrapper for mapping/reducer syntax
+ */
+export interface StoreState {
   appState: AppState;
 }
 

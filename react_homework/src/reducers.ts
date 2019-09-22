@@ -1,6 +1,11 @@
 import { Reducer, combineReducers } from "redux";
-import { AppActions, initialAppState, AppState, WrapState } from "./store";
+import { AppActions, initialAppState, AppState, StoreState } from "./store";
 
+/**
+ * Mapping of actions to reducer function
+ * @param state
+ * @param action
+ */
 const remoteReducer: Reducer<AppState, AppActions> = (
   state = initialAppState,
   action: AppActions
@@ -35,18 +40,13 @@ const remoteReducer: Reducer<AppState, AppActions> = (
         loading: false,
         error
       };
-    case "DialogAction":
-      const { message } = action;
-      return {
-        ...state,
-        message
-      };
+
     default:
       console.log(`Unknown action: ${type}`);
   }
   return state;
 };
 
-export const rootReducer = combineReducers<WrapState>({
+export const rootReducer = combineReducers<StoreState>({
   appState: remoteReducer
 });

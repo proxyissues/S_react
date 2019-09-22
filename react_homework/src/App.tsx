@@ -4,7 +4,7 @@ import "./App.scss";
 
 import {
   RateMap,
-  WrapState,
+  StoreState,
   changeURLAction,
   loadDataAction,
   notifyUser
@@ -76,12 +76,14 @@ const App: React.FC<Props> = props => {
   );
 };
 
-const mapStateToProps = (store: WrapState) => {
+const mapStateToProps = ({
+  appState: { loading, url, rates, error }
+}: StoreState) => {
   return {
-    loading: store.appState.loading,
-    url: store.appState.url,
-    rates: store.appState.rates,
-    error: store.appState.error
+    loading,
+    url,
+    rates,
+    error
   };
 };
 

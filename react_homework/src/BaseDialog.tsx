@@ -10,6 +10,10 @@ export interface ModalProps {
   message: string | undefined;
   closeModal: () => void;
 }
+/**
+ * Simple dialog informing user of error message.
+ * @param param0 message to be displayed and function invoked after closing
+ */
 export const BaseModal = ({ message, closeModal }: ModalProps) => {
   return (
     <Dialog open={!!message}>
