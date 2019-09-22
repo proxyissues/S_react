@@ -1,8 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Loading Spinner visibility requires slow network connection or latency.  
+Eg. Slow 3G + invalid REST target (https://api.exchangeratesapi.io/lat) or https://api.exchangeratesapi.io/latest?&foo=bar
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs all required depenencies required by all following commands
 
 ### `npm start`
 
