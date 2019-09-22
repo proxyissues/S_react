@@ -31,6 +31,7 @@ const remoteReducer: Reducer<AppState, AppActions> = (
             const { error } = action;
             return {
                 ...state,
+                //loading: false,
                 error
             }
         default:

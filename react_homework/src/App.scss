@@ -41,7 +41,7 @@ $linkColor: #09d3ac;
   gap: 1rem;
   width: 50%;
   grid-template-columns: 15rem auto;
-  div:nth-child(odd) {
+  :nth-child(odd) {
     justify-self: right;
   }
   :nth-child(even){
@@ -52,4 +52,27 @@ $linkColor: #09d3ac;
 .header-block {
   display: grid;
   column-gap: 2rem;
+}
+
+.data-table {
+  display: grid;
+  column-gap: 2rem;
+  width: 50%;
+
+  grid-template-columns: auto auto;
+  @media (min-width: 600px){
+    grid-template-columns: auto auto auto auto;
+  }
+
+  @media (min-width: 1200px){
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+
+  :nth-child(odd){
+    color: #ca5858;
+    justify-self: right;
+  }
+  :nth-child(even){
+    justify-self: right;
+  }
 }

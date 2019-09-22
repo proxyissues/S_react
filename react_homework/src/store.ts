@@ -35,7 +35,8 @@ const getDataFromApi = async (url: string) : Promise<RemoteData> => {
         throw `No URL Provided`;  // eslint-disable-line no-throw-literal
     }
 
-    return fetch(url).then(response => response.json()).catch(e => {throw e});
+    return fetch(url).then(response => response.json())
+    .catch(e => {throw `Error`});
 }
 
 export const loadDataAction: ActionCreator<ThunkAction<Promise<void>, RemoteData, null, LoadedData>> = (url) => {

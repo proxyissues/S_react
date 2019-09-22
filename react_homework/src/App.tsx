@@ -9,11 +9,12 @@ import { AnyAction } from 'redux';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { DataTable } from './DataTable';
 
 
 
 export interface Props {
-  loadData?: () => void;
+  loadData?: (url: string) => void;
   url?: string;
   changeURL?: (url: string) => void;
   loading?: boolean;
@@ -27,7 +28,7 @@ export interface Props {
 const App: React.FC<Props> = (props) => {
 
   const fetchData = () => {
-    props.loadData ? props.loadData() : console.log("Fetch");
+    props.loadData && props.url ? props.loadData(props.url) : console.log("Fetch requested by no props");
   }
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     props.changeURL!(event.currentTarget.value || '');
@@ -47,7 +48,9 @@ const App: React.FC<Props> = (props) => {
           
         </div>
         
+        
         <p className="error">{props.error}</p>
+        <DataTable rates={props.rates}/>
       </header>
     </div>
   );
@@ -63,9 +66,9 @@ const mapStateToProps = (store: WrapState) => {
   }
 };
 
-const mapDispatchProps = (dispatch: ThunkDispatch<any, any, AnyAction>, ownProps: Props) => {
+const mapDispatchProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-    loadData: () => dispatch(loadDataAction(ownProps.url)),
+    loadData: (url: string) => dispatch(loadDataAction(url)),
     changeURL: (url: string) => dispatch(changeURLAction(url))
   }
 };
