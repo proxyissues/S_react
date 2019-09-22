@@ -7,6 +7,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 export interface Props {
   loadData?: () => void;
@@ -18,7 +22,10 @@ export interface Props {
   error?: string ;
 }
 
+
+
 const App: React.FC<Props> = (props) => {
+
   const fetchData = () => {
     props.loadData ? props.loadData() : console.log("Fetch");
   }
@@ -30,14 +37,17 @@ const App: React.FC<Props> = (props) => {
     <div className="App">
       <header className="App-header">
         
-        <p className="remote-fields">
-          <span>Remote URL: </span><input className="url-field" onChange={handleChange} value={props.url} />
-        </p>
-        <p>
-         <button onClick={fetchData}>Fetch Data</button>
-        </p>
+        <div className="header-block">
+          <div className="control-block">
+            <div>Remote URL:</div>
+            <div><input className="url-field" onChange={handleChange} value={props.url} /></div>
+            <div><Button variant="contained" color="primary" onClick={fetchData}>Fetch Data</Button></div>
+            {props.loading ? <CircularProgress className="spinner"/> :''}  
+          </div>
+          
+        </div>
         
-        <div className="error">{props.error}</div>
+        <p className="error">{props.error}</p>
       </header>
     </div>
   );

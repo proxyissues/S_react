@@ -34,8 +34,22 @@ $linkColor: #09d3ac;
   color: red;
 }
 
-.remote-fields {
-  span {
-    padding-right: 1rem;
+
+.control-block {
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  width: 50%;
+  grid-template-columns: 15rem auto;
+  div:nth-child(odd) {
+    justify-self: right;
   }
+  :nth-child(even){
+    justify-self: left;
+  }
+}
+
+.header-block {
+  display: grid;
+  column-gap: 2rem;
 }
