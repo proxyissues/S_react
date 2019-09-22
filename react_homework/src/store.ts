@@ -64,7 +64,7 @@ export const loadDataAction: ActionCreator<
     dispatch(gettingDataAction);
     try {
       const data = await getDataFromApi(url);
-      if(data.error){
+      if (data.error) {
         throw data.error;
       }
       const loadedData: LoadedData = {
