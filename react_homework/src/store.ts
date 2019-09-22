@@ -36,7 +36,7 @@ const getDataFromApi = async (url: string) : Promise<RemoteData> => {
     }
 
     return fetch(url).then(response => response.json())
-    .catch(e => {throw `Error`});
+    .catch(e => {throw `Error: ${e.message}`});
 }
 
 export const loadDataAction: ActionCreator<ThunkAction<Promise<void>, RemoteData, null, LoadedData>> = (url) => {
